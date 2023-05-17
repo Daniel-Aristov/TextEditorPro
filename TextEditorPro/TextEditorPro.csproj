@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <None Remove="15doje5d.tv5~" />
+    <None Remove="1bn0rkzq.2u2~" />
+    <None Remove="knspy4au.oxj~" />
     <None Remove="MainWindow.Designer.cs~RFdfb3bd0.TMP" />
   </ItemGroup>
 

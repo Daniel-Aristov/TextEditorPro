@@ -14,24 +14,20 @@
         {
             using (Pen pen = new Pen(color))
             {
-                //Dim g As Graphics
                 var BaseRect = new RectangleF(x, y, width, height);
                 var ArcRect = new RectangleF(BaseRect.Location, new SizeF(m_diameter, m_diameter));
-                //top left Arc
+                
                 g.DrawArc(pen, ArcRect, 180, 90);
                 g.DrawLine(pen, x + Convert.ToInt32(m_diameter / 2), y, x + width - Convert.ToInt32(m_diameter / 2), y);
 
-                // top right arc
                 ArcRect.X = BaseRect.Right - m_diameter;
                 g.DrawArc(pen, ArcRect, 270, 90);
                 g.DrawLine(pen, x + width, y + Convert.ToInt32(m_diameter / 2), x + width, y + height - Convert.ToInt32(m_diameter / 2));
 
-                // bottom right arc
                 ArcRect.Y = BaseRect.Bottom - m_diameter;
                 g.DrawArc(pen, ArcRect, 0, 90);
                 g.DrawLine(pen, x + Convert.ToInt32(m_diameter / 2), y + height, x + width - Convert.ToInt32(m_diameter / 2), y + height);
 
-                // bottom left arc
                 ArcRect.X = BaseRect.Left;
                 g.DrawArc(pen, ArcRect, 90, 90);
                 g.DrawLine(pen, x, y + Convert.ToInt32(m_diameter / 2), x, y + height - Convert.ToInt32(m_diameter / 2));
@@ -61,9 +57,9 @@
                 }
                 else
                 {
-                    e.Item.ForeColor = Color.Black;
+                    e.Item.ForeColor = Color.White;
                 }
-                if ((e.Item as ToolStripMenuItem).DropDown.Visible && e.Item.IsOnDropDown == false)
+                if (((ToolStripMenuItem)e.Item).DropDown.Visible && e.Item.IsOnDropDown == false)
                 {
                     var rect = new Rectangle(2, 1, e.Item.Width - 4, e.Item.Height - 2);
                     var rect2 = new Rectangle(2, 1, e.Item.Width - 4, e.Item.Height - 2);
@@ -117,9 +113,9 @@
             base.OnRenderImageMargin(e);
 
             var rect = new Rectangle(0, 0, e.ToolStrip.Width, e.ToolStrip.Height);
-            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(255, 255, 255, 255)), rect);
+            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(64, 64, 64)), rect); ;
 
-            var DarkLine = new SolidBrush(Color.FromArgb(255, 240, 250, 255));
+            var DarkLine = new SolidBrush(Color.FromArgb(163, 163, 163));
             var rect2 = new Rectangle(1, 2, 24, e.AffectedBounds.Height);
             e.Graphics.FillRectangle(DarkLine, rect2);
 

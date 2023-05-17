@@ -34,10 +34,11 @@
             // 
             // LineNumberTextBox
             // 
-            LineNumberTextBox.BackColor = Color.FromArgb(240, 250, 240);
+            LineNumberTextBox.BackColor = Color.FromArgb(64, 64, 64);
             LineNumberTextBox.BorderStyle = BorderStyle.None;
             LineNumberTextBox.Dock = DockStyle.Left;
             LineNumberTextBox.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            LineNumberTextBox.ForeColor = SystemColors.Window;
             LineNumberTextBox.Location = new Point(0, 0);
             LineNumberTextBox.Name = "LineNumberTextBox";
             LineNumberTextBox.ReadOnly = true;
@@ -49,8 +50,10 @@
             // 
             // richTextBoxPlus
             // 
+            richTextBoxPlus.BackColor = Color.FromArgb(64, 64, 64);
             richTextBoxPlus.Dock = DockStyle.Fill;
             richTextBoxPlus.Font = new Font("Arial", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            richTextBoxPlus.ForeColor = SystemColors.Window;
             richTextBoxPlus.Location = new Point(30, 0);
             richTextBoxPlus.Name = "richTextBoxPlus";
             richTextBoxPlus.Size = new Size(267, 237);

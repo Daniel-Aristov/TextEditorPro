@@ -50,5 +50,17 @@ namespace TextEditorPro
                 }
             }
         }
+
+        public static void FontStyleEdit(TabControl tabControlPlus, FontStyle fontStyle)
+        {
+            var _myRichTextBox = (MyRichTextBox)tabControlPlus.TabPages[tabControlPlus.SelectedIndex].Controls[0];
+            _myRichTextBox.richTextBoxPlus.SelectionFont = new Font(_myRichTextBox.richTextBoxPlus.Font, _myRichTextBox.richTextBoxPlus.SelectionFont.Style | fontStyle);
+        }
+
+        public static void FontStyleDefault(TabControl tabControlPlus)
+        {
+            var _myRichTextBox = (MyRichTextBox)tabControlPlus.TabPages[tabControlPlus.SelectedIndex].Controls[0];
+            _myRichTextBox.richTextBoxPlus.SelectionFont = new Font(_myRichTextBox.richTextBoxPlus.Font, FontStyle.Regular);
+        }
     }
 }

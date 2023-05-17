@@ -55,51 +55,59 @@ namespace TextEditorPro
         {
             TabPagePlus tabpage = new TabPagePlus(this);
             tabpage.Text = "Безымянный - " + count;
-            tabControlPlus.TabPages.Add(tabpage);
-            tabControlPlus.SelectedTab = tabpage;
-
-            var _myRichTextBox = (MyRichTextBox)tabControlPlus.TabPages[tabControlPlus.SelectedIndex].Controls[0];
-            _myRichTextBox.richTextBoxPlus.Select();
+            FileWork.FileNew(tabControlPlus, tabpage);
             FilenameStatusLabel.Text = tabpage.Text;
             count++;
         }
 
         private void OpenFile_MenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog.Filter = "Text Files(*.txt)|*.txt|RichText Files(*.rtf)|*.rtf|All files (*.*)|*.*";
-            OpenFileDialog.FileName = "";
-            if (OpenFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                string filename = OpenFileDialog.FileName;
+            TabPagePlus tabpage = new TabPagePlus(this);
+            RichTextBox rtb = tabpage._myRichTextBox.richTextBoxPlus;
+            FileWork.FileOpen(tabControlPlus, tabpage, OpenFileDialog, rtb, FilenameStatusLabel);
+            //OpenFileDialog.Filter = "All files (*.*)|*.*|Text Files(*.txt)|*.txt|RichText Files(*.rtf)|*.rtf";
+            //OpenFileDialog.FileName = "";
 
-                TabPagePlus tabpage = new TabPagePlus(this);
+            //TabPagePlus tabpage = new TabPagePlus(this);
+            //tabpage._myRichTextBox.richTextBoxPlus.SelectAll();
+            //tabpage._myRichTextBox.richTextBoxPlus.SelectionBackColor = tabpage._myRichTextBox.richTextBoxPlus.BackColor;
+            //tabpage._myRichTextBox.richTextBoxPlus.DeselectAll();
 
-                StreamReader strReader = new StreamReader(filename);
-                tabpage._myRichTextBox.richTextBoxPlus.Text = strReader.ReadToEnd();
-                strReader.Close();
+            //if (OpenFileDialog.ShowDialog() == DialogResult.OK)
+            //{
+            //    string filename = OpenFileDialog.FileName;
 
-                string fname = filename.Substring(filename.LastIndexOf("\\") + 1);
-                tabpage.Text = fname;
+            //    if (Path.GetExtension(filename) == ".rtf")
+            //    {
+            //        tabpage._myRichTextBox.richTextBoxPlus.LoadFile(filename, RichTextBoxStreamType.RichText);
+            //    }
+            //    else if (Path.GetExtension(filename) == ".txt")
+            //    {
+            //        tabpage._myRichTextBox.richTextBoxPlus.LoadFile(filename, RichTextBoxStreamType.PlainText);
+            //    }
 
-                tabControlPlus.TabPages.Add(tabpage);
-                tabControlPlus.SelectedTab = tabpage;
+            //    string fname = filename.Substring(filename.LastIndexOf("\\") + 1);
+            //    tabpage.Text = fname;
 
-                fname = tabpage.Text;
-                if (fname.Contains("*"))
-                {
-                    fname = fname.Remove(fname.Length - 1);
-                }
-                tabpage.Text = fname;
+            //    tabControlPlus.TabPages.Add(tabpage);
+            //    tabControlPlus.SelectedTab = tabpage;
 
-                OpenedFilesList.Add(filename);
-                FilenameStatusLabel.Text = filename;
+            //    fname = tabpage.Text;
+            //    if (fname.Contains("*"))
+            //    {
+            //        fname = fname.Remove(fname.Length - 1);
+            //    }
+            //    tabpage.Text = fname;
 
-                if (tabControlPlus.SelectedIndex >= 0)
-                {
-                    var _myRichTextBox = (MyRichTextBox)tabControlPlus.TabPages[tabControlPlus.SelectedIndex].Controls[0];
-                    _myRichTextBox.richTextBoxPlus.Select();
-                }
-            }
+            //    OpenedFilesList.Add(filename);
+            //    FilenameStatusLabel.Text = filename;
+
+            //    if (tabControlPlus.SelectedIndex >= 0)
+            //    {
+            //        var _myRichTextBox = (MyRichTextBox)tabControlPlus.TabPages[tabControlPlus.SelectedIndex].Controls[0];
+            //        _myRichTextBox.richTextBoxPlus.Select();
+            //    }
+            //}
         }
 
         private void SaveFile_MenuItem_Click(object sender, EventArgs e)
@@ -114,10 +122,16 @@ namespace TextEditorPro
                     {
                         var _myRichTextBox = (MyRichTextBox)tabControlPlus.TabPages[tabControlPlus.SelectedIndex].Controls[0];
                         File.WriteAllText(filename, "");
-                        StreamWriter strwriter = File.AppendText(filename);
-                        strwriter.Write(_myRichTextBox.richTextBoxPlus.Text);
-                        strwriter.Close();
-                        strwriter.Dispose();
+                        
+                        if (Path.GetExtension(filename) == ".rtf")
+                        {
+                            _myRichTextBox.richTextBoxPlus.SaveFile(filename, RichTextBoxStreamType.RichText);
+                        }
+                        else if (Path.GetExtension(filename) == ".txt")
+                        {
+                            _myRichTextBox.richTextBoxPlus.SaveFile(filename, RichTextBoxStreamType.PlainText);
+                        }
+
                         tabpage.Text = tabpage.Text.Remove(tabpage.Text.Length - 1);
                     }
                 }
@@ -135,21 +149,29 @@ namespace TextEditorPro
                 TabPage tabpage = tabControlPlus.SelectedTab;
                 if (tabpage != null)
                 {
-                    SaveFileDialog.Filter = "Text Files(*.txt)|*.txt|RichText Files(*.rtf)|*.rtf|All files (*.*)|*.*";
+                    SaveFileDialog.Filter = "All files (*.*)|*.*|Text Files(*.txt)|*.txt|RichText Files(*.rtf)|*.rtf";
                     SaveFileDialog.FileName = "";
 
                     var _myRichTextBox = (MyRichTextBox)tabControlPlus.TabPages[tabControlPlus.SelectedIndex].Controls[0];
-                    
+                    _myRichTextBox.richTextBoxPlus.SelectAll();
+                    _myRichTextBox.richTextBoxPlus.SelectionBackColor = _myRichTextBox.richTextBoxPlus.BackColor;
+                    _myRichTextBox.richTextBoxPlus.DeselectAll();
+
                     if (SaveFileDialog.ShowDialog() == DialogResult.OK)
                     {
                         string filename = SaveFileDialog.FileName;
                         if (filename != "")
                         {
                             File.WriteAllText(filename, "");
-                            StreamWriter strw = new StreamWriter(filename);
-                            strw.Write(_myRichTextBox.richTextBoxPlus.Text);
-                            strw.Close();
-                            strw.Dispose();
+
+                            if (Path.GetExtension(filename) == ".rtf")
+                            {
+                                _myRichTextBox.richTextBoxPlus.SaveFile(filename, RichTextBoxStreamType.RichText);
+                            }
+                            else if (Path.GetExtension(filename) == ".txt")
+                            {
+                                _myRichTextBox.richTextBoxPlus.SaveFile(filename, RichTextBoxStreamType.PlainText);
+                            }
 
                             string fname = filename.Substring(filename.LastIndexOf("\\") + 1);
                             tabpage.Text = fname;
@@ -361,6 +383,26 @@ namespace TextEditorPro
             ViewEdit.BackColorEdit(tabControlPlus);
         }
 
+        private void BoldStripButton_Click(object sender, EventArgs e)
+        {
+            ViewEdit.FontStyleEdit(tabControlPlus, FontStyle.Bold);
+        }
+
+        private void UnderlineStripButton_Click(object sender, EventArgs e)
+        {
+            ViewEdit.FontStyleEdit(tabControlPlus, FontStyle.Underline);
+        }
+
+        private void CoursiveStripButton_Click(object sender, EventArgs e)
+        {
+            ViewEdit.FontStyleEdit(tabControlPlus, FontStyle.Italic);
+        }
+
+        private void RegularStripButton_Click(object sender, EventArgs e)
+        {
+            ViewEdit.FontStyleDefault(tabControlPlus);
+        }
+
         private void tabControlPlus_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControlPlus.TabCount > 0)
@@ -403,6 +445,21 @@ namespace TextEditorPro
             }
         }
 
+        private void Copy_MenuItem_Click(object sender, EventArgs e)
+        {
+            TextEdit.CopySelectText(tabControlPlus);
+        }
+
+        private void Cut_MenuItem_Click(object sender, EventArgs e)
+        {
+            TextEdit.CutSelectText(tabControlPlus);
+        }
+
+        private void Paste_MenuItem_Click(object sender, EventArgs e)
+        {
+            TextEdit.PasteSelectText(tabControlPlus);
+        }
+
         private void NewFile_toolStripButton_Click_1(object sender, EventArgs e)
         {
             NewFile_MenuItem_Click(sender, e);
@@ -418,9 +475,25 @@ namespace TextEditorPro
             SaveFile_MenuItem_Click(sender, e);
         }
 
-        private void SaveAsFile_toolStripButton_Click(object sender, EventArgs e)
+        private void Copy_toolStripButton_Click(object sender, EventArgs e)
         {
-            SaveAsFile_MenuItem_Click(sender, e);
+            Copy_MenuItem_Click(sender, e);
+        }
+
+        private void Cut_toolStripButton_Click(object sender, EventArgs e)
+        {
+            Cut_MenuItem_Click(sender, e);
+        }
+
+        private void Paste_toolStripButton_Click(object sender, EventArgs e)
+        {
+            Paste_MenuItem_Click(sender, e);
+        }
+
+        private void About_MenuItem_Click(object sender, EventArgs e)
+        {
+            AboutProgramBox aboutProgramBox = new AboutProgramBox();
+            aboutProgramBox.Show();
         }
     }
 }

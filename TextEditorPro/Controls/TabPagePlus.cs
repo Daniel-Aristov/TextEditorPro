@@ -22,7 +22,7 @@
 
         private void richTextBoxPlus_TextChanged(object sender, EventArgs e)
         {
-            String str = this.Text;
+            string str = this.Text;
             if (str.Contains("*")) {}
             else this.Text = str + "*";
         }
