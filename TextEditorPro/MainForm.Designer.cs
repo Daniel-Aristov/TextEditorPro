@@ -40,7 +40,6 @@
             SaveAll_MenuItem = new ToolStripMenuItem();
             toolStripSeparator3 = new ToolStripSeparator();
             CloseFile_MenuItem = new ToolStripMenuItem();
-            CloseAll_MenuItem = new ToolStripMenuItem();
             toolStripSeparator4 = new ToolStripSeparator();
             Close_MenuItem = new ToolStripMenuItem();
             правкаToolStripMenuItem = new ToolStripMenuItem();
@@ -96,7 +95,7 @@
             // 
             // файлToolStripMenuItem
             // 
-            файлToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { NewFile_MenuItem, toolStripSeparator1, OpenFile_MenuItem, toolStripSeparator2, SaveFile_MenuItem, SaveAsFile_MenuItem, SaveAll_MenuItem, toolStripSeparator3, CloseFile_MenuItem, CloseAll_MenuItem, toolStripSeparator4, Close_MenuItem });
+            файлToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { NewFile_MenuItem, toolStripSeparator1, OpenFile_MenuItem, toolStripSeparator2, SaveFile_MenuItem, SaveAsFile_MenuItem, SaveAll_MenuItem, toolStripSeparator3, CloseFile_MenuItem, toolStripSeparator4, Close_MenuItem });
             файлToolStripMenuItem.ForeColor = Color.White;
             файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             файлToolStripMenuItem.Size = new Size(55, 21);
@@ -172,14 +171,6 @@
             CloseFile_MenuItem.Size = new Size(262, 22);
             CloseFile_MenuItem.Text = "Закрыть файл";
             CloseFile_MenuItem.Click += CloseFile_MenuItem_Click;
-            // 
-            // CloseAll_MenuItem
-            // 
-            CloseAll_MenuItem.ForeColor = Color.White;
-            CloseAll_MenuItem.Name = "CloseAll_MenuItem";
-            CloseAll_MenuItem.Size = new Size(262, 22);
-            CloseAll_MenuItem.Text = "Закрыть все";
-            CloseAll_MenuItem.Click += CloseAll_MenuItem_Click;
             // 
             // toolStripSeparator4
             // 
@@ -544,7 +535,6 @@
         private ToolStripMenuItem BackColor_MenuItem;
         private OpenFileDialog OpenFileDialog;
         private ToolStripMenuItem SaveAll_MenuItem;
-        private ToolStripMenuItem CloseAll_MenuItem;
         private SaveFileDialog SaveFileDialog;
         private ToolStripMenuItem Close_MenuItem;
         private StatusStrip StatusStrip;
