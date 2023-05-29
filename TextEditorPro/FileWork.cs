@@ -75,8 +75,6 @@ namespace TextEditorPro
                 if (File.Exists(filename))
                 {
                     var _myRichTextBox = (MyRichTextBox)tabControl.TabPages[tabControl.SelectedIndex].Controls[0];
-                    File.WriteAllText(filename, "");
-
                     if (Path.GetExtension(filename) == ".rtf")
                     {
                         _myRichTextBox.richTextBoxPlus.SaveFile(filename, RichTextBoxStreamType.RichText);
@@ -109,8 +107,6 @@ namespace TextEditorPro
                         string filename = saveFileDialog.FileName;
                         if (filename != "")
                         {
-                            File.WriteAllText(filename, "");
-
                             if (Path.GetExtension(filename) == ".rtf")
                             {
                                 _myRichTextBox.richTextBoxPlus.SaveFile(filename, RichTextBoxStreamType.RichText);
@@ -123,7 +119,6 @@ namespace TextEditorPro
                             string fname = filename.Substring(filename.LastIndexOf("\\") + 1);
                             tabPage.Text = fname;
                             filenameStatusLabel.Text = filename;
-
                             OpenedFilesList.Add(filename);
                         }
                     }
@@ -135,7 +130,6 @@ namespace TextEditorPro
         {
             if (tabControl.TabCount > 0)
             {
-                OpenedFilesList.Reverse();
                 TabControl.TabPageCollection tabcoll = tabControl.TabPages;
 
                 foreach (TabPage tabpage in tabcoll)
@@ -147,17 +141,34 @@ namespace TextEditorPro
                     {
                         try
                         {
-                            var _myRichTextBox = (MyRichTextBox)tabControl.TabPages[tabControl.SelectedIndex].Controls[0];
-                            File.WriteAllText(filenameStatusLabel.Text, "");
+                            FileSave(tabControl, tabpage, filenameStatusLabel);
 
-                            if (Path.GetExtension(filenameStatusLabel.Text) == ".rtf")
+                            string str = tabpage.Text;
+                            if (str.Contains("*"))
                             {
-                                _myRichTextBox.richTextBoxPlus.SaveFile(filenameStatusLabel.Text, RichTextBoxStreamType.RichText);
+                                str = str.Remove(str.Length - 1);
                             }
-                            else if (Path.GetExtension(filenameStatusLabel.Text) == ".txt")
+                            tabpage.Text = str;
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Ошибка! Сохранение не удалось!");
+                        }
+                    } else
+                    {
+                        try
+                        {
+                            SaveFileDialog saveFileDialog = new SaveFileDialog();
+                            saveFileDialog.Filter = "All files (*.*)|*.*|Text Files(*.txt)|*.txt|RichText Files(*.rtf)|*.rtf";
+                            saveFileDialog.FileName = "";
+                            FileSaveAs(tabControl, tabpage, saveFileDialog, filenameStatusLabel);
+                            
+                            string str = tabpage.Text;
+                            if (str.Contains("*"))
                             {
-                                _myRichTextBox.richTextBoxPlus.SaveFile(filenameStatusLabel.Text, RichTextBoxStreamType.PlainText);
+                                str = str.Remove(str.Length - 1);
                             }
+                            tabpage.Text = str;
                         }
                         catch
                         {
@@ -165,25 +176,13 @@ namespace TextEditorPro
                         }
                     }
                 }
-
-                TabControl.TabPageCollection tabcollection = tabControl.TabPages;
-                foreach (TabPage tabpage in tabcollection)
-                {
-                    string str = tabpage.Text;
-                    if (str.Contains("*") && !str.Contains("Безымянный"))
-                    {
-                        str = str.Remove(str.Length - 1);
-                    }
-                    tabpage.Text = str;
-                }
             }
         }
 
-        public static void FileClose(TabControl tabControl, ToolStripStatusLabel filenameStatusLabel)
+        public static void FileClose(TabControl tabControl, TabPage tabpage, ToolStripStatusLabel filenameStatusLabel)
         {
             if (tabControl.TabCount > 0)
             {
-                TabPage tabpage = tabControl.SelectedTab;
                 if (tabpage.Text.Contains("*"))
                 {
                     DialogResult dg = MessageBox.Show("Вы хотите сохранить файл " + tabpage.Text + " перед закрытием?", "Сохранение файла", MessageBoxButtons.YesNo);
@@ -234,6 +233,33 @@ namespace TextEditorPro
             {
                 count = 1;
                 filenameStatusLabel.Text = "";
+            }
+        }
+
+        public static void FileCloseAll(TabControl tabControl, ToolStripStatusLabel filenameStatusLabel)
+        {
+            if (tabControl.TabCount > 0)
+            {
+                TabControl.TabPageCollection tabcoll = tabControl.TabPages;
+                foreach (TabPage tabpage in tabcoll)
+                {
+                    tabControl.SelectedTab = tabpage;
+                    if (tabpage.Text.Contains("*"))
+                    {
+                        DialogResult dg = MessageBox.Show("Вы хотите сохранить файл " + tabpage.Text + " перед закрытием?", "Сохранение файла", MessageBoxButtons.YesNoCancel);
+                        if (dg == DialogResult.Yes)
+                        {
+                            FileSave(tabControl, tabpage, filenameStatusLabel);
+                            tabControl.TabPages.Remove(tabpage);
+                            TabControlSelectedIndexChanged(tabControl, filenameStatusLabel);
+                        }
+                    }
+                    else
+                    {
+                        tabControl.TabPages.Remove(tabpage);
+                        TabControlSelectedIndexChanged(tabControl, filenameStatusLabel);
+                    }
+                }
             }
         }
 

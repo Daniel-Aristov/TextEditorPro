@@ -30,14 +30,14 @@ namespace TextEditorPro
 
         private void SaveFile_MenuItem_Click(object sender, EventArgs e)
         {
+            TabPage tabpage = tabControlPlus.SelectedTab;
             if (FilenameStatusLabel.Text.Contains("\\"))
-            {
-                TabPage tabpage = tabControlPlus.SelectedTab;
+            {  
                 FileWork.FileSave(tabControlPlus, tabpage, FilenameStatusLabel);
             }
             else
             {
-                SaveAsFile_MenuItem_Click(sender, e);
+                FileWork.FileSaveAs(tabControlPlus, tabpage, SaveFileDialog, FilenameStatusLabel);
             }
         }
 
@@ -54,7 +54,8 @@ namespace TextEditorPro
 
         private void CloseFile_MenuItem_Click(object sender, EventArgs e)
         {
-            FileWork.FileClose(tabControlPlus, FilenameStatusLabel);
+            TabPage tabpage = tabControlPlus.SelectedTab;
+            FileWork.FileClose(tabControlPlus, tabpage, FilenameStatusLabel);
 
             LineToolStripLabel.Text = "Строка: 1";
             ColumnToolStripLabel.Text = "Колонка: 1";
@@ -62,45 +63,12 @@ namespace TextEditorPro
 
         private void MainForm_Closing(object sender, FormClosingEventArgs e)
         {
-            if (tabControlPlus.TabCount > 0)
-            {
-                TabControl.TabPageCollection tabcoll = tabControlPlus.TabPages;
-                foreach (TabPage tabpage in tabcoll)
-                {
-                    tabControlPlus.SelectedTab = tabpage;
-                    if (tabpage.Text.Contains("*"))
-                    {
-                        DialogResult dg = MessageBox.Show("Вы хотите сохранить файл " + tabpage.Text + " перед закрытием?", "Сохранение файла", MessageBoxButtons.YesNoCancel);
-                        if (dg == DialogResult.Yes)
-                        {
-                            SaveFile_MenuItem_Click(sender, e);
-                            tabControlPlus.TabPages.Remove(tabpage);
-                            tabControlPlus_SelectedIndexChanged(sender, e);
-                        }
-                        else if (dg == DialogResult.Cancel)
-                        {
-                            e.Cancel = true;
-                            tabControlPlus.Select();
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        tabControlPlus.TabPages.Remove(tabpage);
-                        tabControlPlus_SelectedIndexChanged(sender, e);
-                    }
-                }
-            }
+            FileWork.FileCloseAll(tabControlPlus, FilenameStatusLabel);
         }
 
         private void tabControlPlus_SelectedIndexChanged(object sender, EventArgs e)
         {
             FileWork.TabControlSelectedIndexChanged(tabControlPlus, FilenameStatusLabel);
-        }
-
-        private void Exit_MenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private void FontChange_MenuItem_Click(object sender, EventArgs e)

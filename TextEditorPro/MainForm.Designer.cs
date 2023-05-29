@@ -40,8 +40,6 @@
             SaveAll_MenuItem = new ToolStripMenuItem();
             toolStripSeparator3 = new ToolStripSeparator();
             CloseFile_MenuItem = new ToolStripMenuItem();
-            toolStripSeparator4 = new ToolStripSeparator();
-            Close_MenuItem = new ToolStripMenuItem();
             правкаToolStripMenuItem = new ToolStripMenuItem();
             Copy_MenuItem = new ToolStripMenuItem();
             Cut_MenuItem = new ToolStripMenuItem();
@@ -95,7 +93,7 @@
             // 
             // файлToolStripMenuItem
             // 
-            файлToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { NewFile_MenuItem, toolStripSeparator1, OpenFile_MenuItem, toolStripSeparator2, SaveFile_MenuItem, SaveAsFile_MenuItem, SaveAll_MenuItem, toolStripSeparator3, CloseFile_MenuItem, toolStripSeparator4, Close_MenuItem });
+            файлToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { NewFile_MenuItem, toolStripSeparator1, OpenFile_MenuItem, toolStripSeparator2, SaveFile_MenuItem, SaveAsFile_MenuItem, SaveAll_MenuItem, toolStripSeparator3, CloseFile_MenuItem });
             файлToolStripMenuItem.ForeColor = Color.White;
             файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             файлToolStripMenuItem.Size = new Size(55, 21);
@@ -171,20 +169,6 @@
             CloseFile_MenuItem.Size = new Size(262, 22);
             CloseFile_MenuItem.Text = "Закрыть файл";
             CloseFile_MenuItem.Click += CloseFile_MenuItem_Click;
-            // 
-            // toolStripSeparator4
-            // 
-            toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Size = new Size(259, 6);
-            // 
-            // Close_MenuItem
-            // 
-            Close_MenuItem.ForeColor = Color.White;
-            Close_MenuItem.Name = "Close_MenuItem";
-            Close_MenuItem.ShortcutKeys = Keys.Alt | Keys.F4;
-            Close_MenuItem.Size = new Size(262, 22);
-            Close_MenuItem.Text = "Выход";
-            Close_MenuItem.Click += Exit_MenuItem_Click;
             // 
             // правкаToolStripMenuItem
             // 
@@ -536,12 +520,10 @@
         private OpenFileDialog OpenFileDialog;
         private ToolStripMenuItem SaveAll_MenuItem;
         private SaveFileDialog SaveFileDialog;
-        private ToolStripMenuItem Close_MenuItem;
         private StatusStrip StatusStrip;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripSeparator toolStripSeparator3;
-        private ToolStripSeparator toolStripSeparator4;
         private ToolStripSeparator toolStripSeparator5;
         private ToolStripStatusLabel toolStripStatusLabel3;
         private ToolStripStatusLabel toolStripStatusLabel1;
