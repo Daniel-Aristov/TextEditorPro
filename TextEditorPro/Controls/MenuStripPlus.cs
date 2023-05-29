@@ -4,11 +4,11 @@
     {
         public MenuStripPlus()
         {
-            this.Renderer = new MyMenuRenderer();
+            this.Renderer = new CustomMenuRenderer();
         }
     }
 
-    public class MyMenuRenderer : ToolStripRenderer
+    public class CustomMenuRenderer : ToolStripRenderer
     {
         public static void DrawRoundedRectangle(Graphics g, int x, int y, int width, int height, int m_diameter, Color color)
         {
@@ -33,10 +33,11 @@
                 g.DrawLine(pen, x, y + Convert.ToInt32(m_diameter / 2), x, y + height - Convert.ToInt32(m_diameter / 2));
             }
         }
+        
         protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
         {
-
             base.OnRenderMenuItemBackground(e);
+
             if (e.Item.Enabled)
             {
                 if (e.Item.IsOnDropDown == false && e.Item.Selected)
@@ -70,37 +71,11 @@
                 }
             }
         }
-        protected override void OnRenderItemCheck(ToolStripItemImageRenderEventArgs e)
-        {
-            base.OnRenderItemCheck(e);
-
-            if (e.Item.Selected)
-            {
-                var rect = new Rectangle(3, 1, 20, 20);
-                var rect2 = new Rectangle(4, 2, 18, 18);
-                SolidBrush b = new SolidBrush(Color.Orange);
-                SolidBrush b2 = new SolidBrush(Color.FromArgb(255, 220, 230, 230));
-
-                e.Graphics.FillRectangle(b, rect);
-                e.Graphics.FillRectangle(b2, rect2);
-                e.Graphics.DrawImage(e.Image, new Point(5, 3));
-            }
-            else
-            {
-                var rect = new Rectangle(3, 1, 20, 20);
-                var rect2 = new Rectangle(4, 2, 18, 18);
-                SolidBrush b = new SolidBrush(Color.Blue);
-                SolidBrush b2 = new SolidBrush(Color.FromArgb(255, 240, 250, 250));
-
-                e.Graphics.FillRectangle(b, rect);
-                e.Graphics.FillRectangle(b2, rect2);
-                e.Graphics.DrawImage(e.Image, new Point(5, 3));
-            }
-        }
 
         protected override void OnRenderSeparator(ToolStripSeparatorRenderEventArgs e)
         {
             base.OnRenderSeparator(e);
+
             var DarkLine = new SolidBrush(Color.FromArgb(200, 200, 200));
             var WhiteLine = new SolidBrush(Color.FromArgb(200, 200, 200));
             var rect = new Rectangle(30, 3, e.Item.Width - 32, 1);

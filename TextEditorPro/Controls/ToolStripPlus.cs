@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Drawing.Drawing2D;
 
 namespace TextEditorPro.Controls
 {
@@ -15,20 +6,20 @@ namespace TextEditorPro.Controls
     {
         public ToolStripPlus()
         {
-            this.Renderer = new LightToolStripRenderer();
+            this.Renderer = new CustomToolStripRenderer();
         }
     }
 
-    public class LightToolStripRenderer : ToolStripProfessionalRenderer
+    public class CustomToolStripRenderer : ToolStripProfessionalRenderer
     {
         protected override void OnRenderButtonBackground(ToolStripItemRenderEventArgs e)
         {
             base.OnRenderButtonBackground(e);
             var rectBorder = new Rectangle(0, 0, e.Item.Width - 1, e.Item.Height - 1);
             var rect = new Rectangle(1, 1, e.Item.Width - 2, e.Item.Height - 2);
-            Brush b2 = new System.Drawing.Drawing2D.LinearGradientBrush(e.Item.ContentRectangle, Color.FromArgb(241, 248, 251), Color.FromArgb(120, 255, 200), 90);
+            Brush b2 = new LinearGradientBrush(e.Item.ContentRectangle, Color.FromArgb(241, 248, 251), Color.FromArgb(120, 255, 200), 90);
 
-            if (e.Item.Selected == true || (e.Item as ToolStripButton).Checked)
+            if (e.Item.Selected == true || ((ToolStripButton)e.Item).Checked)
             {
                 e.Graphics.FillRectangle(b2, rect);
                 e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.FromArgb(150, 150, 210))), rectBorder);

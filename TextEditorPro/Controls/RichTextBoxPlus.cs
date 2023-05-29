@@ -7,15 +7,10 @@
             InitializeComponent();
         }
 
-        protected override void OnPaint(PaintEventArgs pe)
-        {
-            base.OnPaint(pe);
-        }
-
         protected override void OnSelectionChanged(EventArgs e)
         {
             base.OnSelectionChanged(e);
-            this.Invalidate();
+            Invalidate();
         }
 
         int lineh = 15;
