@@ -162,7 +162,7 @@ namespace TextEditorPro
                             SaveFileDialog saveFileDialog = new SaveFileDialog();
                             saveFileDialog.Filter = "All files (*.*)|*.*|Text Files(*.txt)|*.txt|RichText Files(*.rtf)|*.rtf";
                             saveFileDialog.FileName = "";
-                            FileSaveAs(tabControl, tabpage, saveFileDialog, filenameStatusLabel);
+                            FileSaveAs(tabControl, tabpage, filenameStatusLabel);
                             
                             string str = tabpage.Text;
                             if (str.Contains("*"))

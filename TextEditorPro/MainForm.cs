@@ -15,6 +15,12 @@ namespace TextEditorPro
             NewFile_MenuItem_Click(sender, e);
         }
 
+        private void MainForm_Closing(object sender, FormClosingEventArgs e)
+        {
+            FileWork.FileCloseAll(tabControlPlus, FilenameStatusLabel);
+        }
+
+        // MenuStrip
         private void NewFile_MenuItem_Click(object sender, EventArgs e)
         {
             TabPagePlus tabpage = new TabPagePlus(this);
@@ -32,7 +38,7 @@ namespace TextEditorPro
         {
             TabPage tabpage = tabControlPlus.SelectedTab;
             if (FilenameStatusLabel.Text.Contains("\\"))
-            {  
+            {
                 FileWork.FileSave(tabControlPlus, tabpage, FilenameStatusLabel);
             }
             else
@@ -61,11 +67,6 @@ namespace TextEditorPro
             ColumnToolStripLabel.Text = "Колонка: 1";
         }
 
-        private void MainForm_Closing(object sender, FormClosingEventArgs e)
-        {
-            FileWork.FileCloseAll(tabControlPlus, FilenameStatusLabel);
-        }
-
         private void tabControlPlus_SelectedIndexChanged(object sender, EventArgs e)
         {
             FileWork.TabControlSelectedIndexChanged(tabControlPlus, FilenameStatusLabel);
@@ -86,26 +87,6 @@ namespace TextEditorPro
             ViewEdit.BackColorEdit(tabControlPlus);
         }
 
-        private void BoldStripButton_Click(object sender, EventArgs e)
-        {
-            ViewEdit.FontStyleEdit(tabControlPlus, FontStyle.Bold);
-        }
-
-        private void UnderlineStripButton_Click(object sender, EventArgs e)
-        {
-            ViewEdit.FontStyleEdit(tabControlPlus, FontStyle.Underline);
-        }
-
-        private void CoursiveStripButton_Click(object sender, EventArgs e)
-        {
-            ViewEdit.FontStyleEdit(tabControlPlus, FontStyle.Italic);
-        }
-
-        private void RegularStripButton_Click(object sender, EventArgs e)
-        {
-            ViewEdit.FontStyleDefault(tabControlPlus);
-        }
-
         private void Copy_MenuItem_Click(object sender, EventArgs e)
         {
             TextEdit.CopySelectText(tabControlPlus);
@@ -121,36 +102,58 @@ namespace TextEditorPro
             TextEdit.PasteSelectText(tabControlPlus);
         }
 
-        private void NewFile_toolStripButton_Click_1(object sender, EventArgs e)
+        // ToolStrip
+        private void NewFile_toolStrip_Click(object sender, EventArgs e)
         {
             NewFile_MenuItem_Click(sender, e);
         }
 
-        private void OpenFile_toolStripButton_Click(object sender, EventArgs e)
+        private void OpenFile_toolStrip_Click(object sender, EventArgs e)
         {
             OpenFile_MenuItem_Click(sender, e);
         }
 
-        private void SaveFile_toolStripButton_Click(object sender, EventArgs e)
+        private void SaveFile_toolStrip_Click(object sender, EventArgs e)
         {
             SaveFile_MenuItem_Click(sender, e);
         }
 
-        private void Copy_toolStripButton_Click(object sender, EventArgs e)
+        private void RegularStrip_Click(object sender, EventArgs e)
+        {
+            ViewEdit.FontStyleDefault(tabControlPlus);
+        }
+
+        private void BoldStrip_Click(object sender, EventArgs e)
+        {
+            ViewEdit.FontStyleEdit(tabControlPlus, FontStyle.Bold);
+        }
+
+        private void UnderlineStrip_Click(object sender, EventArgs e)
+        {
+            ViewEdit.FontStyleEdit(tabControlPlus, FontStyle.Underline);
+        }
+
+        private void CoursiveStrip_Click(object sender, EventArgs e)
+        {
+            ViewEdit.FontStyleEdit(tabControlPlus, FontStyle.Italic);
+        }
+
+        private void Copy_toolStrip_Click(object sender, EventArgs e)
         {
             Copy_MenuItem_Click(sender, e);
         }
 
-        private void Cut_toolStripButton_Click(object sender, EventArgs e)
+        private void Cut_toolStrip_Click(object sender, EventArgs e)
         {
             Cut_MenuItem_Click(sender, e);
         }
 
-        private void Paste_toolStripButton_Click(object sender, EventArgs e)
+        private void Paste_toolStrip_Click(object sender, EventArgs e)
         {
             Paste_MenuItem_Click(sender, e);
         }
 
+        // About window
         private void About_MenuItem_Click(object sender, EventArgs e)
         {
             AboutProgramBox aboutProgramBox = new AboutProgramBox();
