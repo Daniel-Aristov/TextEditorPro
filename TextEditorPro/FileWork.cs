@@ -95,7 +95,7 @@ namespace TextEditorPro
                 if (tabPage != null)
                 {
                     SaveFileDialog saveFileDialog = new SaveFileDialog();
-                    saveFileDialog.Filter = "All files (*.*)|*.*|Text Files(*.txt)|*.txt|RichText Files(*.rtf)|*.rtf";
+                    saveFileDialog.Filter = "Text Files(*.txt)|*.txt|RichText Files(*.rtf)|*.rtf";
                     saveFileDialog.FileName = "";
 
                     var _myRichTextBox = (MyRichTextBox)tabControl.TabPages[tabControl.SelectedIndex].Controls[0];

@@ -80,7 +80,7 @@ namespace TextEditorPro.Controls
         public TabControlPlus()
         {
             this.DrawMode = TabDrawMode.OwnerDrawFixed;
-            this.Padding = new System.Drawing.Point(30, 4);
+            this.Padding = new Point(30, 4);
         }
 
         protected override void OnDrawItem(DrawItemEventArgs e)

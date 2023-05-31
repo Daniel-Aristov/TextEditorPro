@@ -9,31 +9,7 @@
     }
 
     public class CustomMenuRenderer : ToolStripRenderer
-    {
-        public static void DrawRoundedRectangle(Graphics g, int x, int y, int width, int height, int m_diameter, Color color)
-        {
-            using (Pen pen = new Pen(color))
-            {
-                var BaseRect = new RectangleF(x, y, width, height);
-                var ArcRect = new RectangleF(BaseRect.Location, new SizeF(m_diameter, m_diameter));
-                
-                g.DrawArc(pen, ArcRect, 180, 90);
-                g.DrawLine(pen, x + Convert.ToInt32(m_diameter / 2), y, x + width - Convert.ToInt32(m_diameter / 2), y);
-
-                ArcRect.X = BaseRect.Right - m_diameter;
-                g.DrawArc(pen, ArcRect, 270, 90);
-                g.DrawLine(pen, x + width, y + Convert.ToInt32(m_diameter / 2), x + width, y + height - Convert.ToInt32(m_diameter / 2));
-
-                ArcRect.Y = BaseRect.Bottom - m_diameter;
-                g.DrawArc(pen, ArcRect, 0, 90);
-                g.DrawLine(pen, x + Convert.ToInt32(m_diameter / 2), y + height, x + width - Convert.ToInt32(m_diameter / 2), y + height);
-
-                ArcRect.X = BaseRect.Left;
-                g.DrawArc(pen, ArcRect, 90, 90);
-                g.DrawLine(pen, x, y + Convert.ToInt32(m_diameter / 2), x, y + height - Convert.ToInt32(m_diameter / 2));
-            }
-        }
-        
+    {   
         protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
         {
             base.OnRenderMenuItemBackground(e);
@@ -43,32 +19,18 @@
                 if (e.Item.IsOnDropDown == false && e.Item.Selected)
                 {
                     var rect = new Rectangle(2, 2, e.Item.Width - 5, e.Item.Height);
-                    Brush b2 = new System.Drawing.Drawing2D.LinearGradientBrush(e.Item.ContentRectangle, Color.FromArgb(255, 255, 255, 255), Color.FromArgb(255, 120, 200, 255), 90);
-                    e.Graphics.FillRectangle(b2, rect);
-                    DrawRoundedRectangle(e.Graphics, rect.Left - 1, rect.Top - 1, rect.Width + 1, rect.Height - 3, 2, Color.FromArgb(80, 150, 200));
+                    Brush brushBg = new System.Drawing.Drawing2D.LinearGradientBrush(e.Item.ContentRectangle, Color.FromArgb(255, 255, 255, 255), Color.FromArgb(255, 120, 200, 255), 90);
+                    e.Graphics.FillRectangle(brushBg, rect);
                     e.Item.ForeColor = Color.Black;
                 }
                 else if (e.Item.IsOnDropDown && e.Item.Selected)
                 {
                     var rect = new Rectangle(3, 1, e.Item.Width - 4, e.Item.Height - 2);
-                    Brush b2 = new System.Drawing.Drawing2D.LinearGradientBrush(e.Item.ContentRectangle, Color.FromArgb(255, 255, 255, 255), Color.FromArgb(255, 120, 200, 255), 90);
-                    e.Graphics.FillRectangle(b2, rect);
-                    DrawRoundedRectangle(e.Graphics, rect.Left - 1, rect.Top - 1, rect.Width, rect.Height + 1, 4, Color.FromArgb(80, 150, 200));
+                    Brush brushBg = new System.Drawing.Drawing2D.LinearGradientBrush(e.Item.ContentRectangle, Color.FromArgb(255, 255, 255, 255), Color.FromArgb(255, 120, 200, 255), 90);
+                    e.Graphics.FillRectangle(brushBg, rect);
                     e.Item.ForeColor = Color.Black;
                 }
-                else
-                {
-                    e.Item.ForeColor = Color.White;
-                }
-                if (((ToolStripMenuItem)e.Item).DropDown.Visible && e.Item.IsOnDropDown == false)
-                {
-                    var rect = new Rectangle(2, 1, e.Item.Width - 4, e.Item.Height - 2);
-                    var rect2 = new Rectangle(2, 1, e.Item.Width - 4, e.Item.Height - 2);
-                    Brush b2 = new System.Drawing.Drawing2D.LinearGradientBrush(e.Item.ContentRectangle, Color.FromArgb(252, 252, 252, 252), Color.FromArgb(255, 120, 200, 255), 90);
-                    e.Graphics.FillRectangle(b2, rect);
-                    DrawRoundedRectangle(e.Graphics, rect.Left - 1, rect.Top - 1, rect.Width, rect.Height + 1, 4, Color.FromArgb(136, 190, 230));
-                    e.Item.ForeColor = Color.Black;
-                }
+                else e.Item.ForeColor = Color.White;
             }
         }
 
@@ -76,10 +38,8 @@
         {
             base.OnRenderSeparator(e);
 
-            var DarkLine = new SolidBrush(Color.FromArgb(200, 200, 200));
             var WhiteLine = new SolidBrush(Color.FromArgb(200, 200, 200));
             var rect = new Rectangle(30, 3, e.Item.Width - 32, 1);
-            e.Graphics.FillRectangle(DarkLine, rect);
             e.Graphics.FillRectangle(WhiteLine, rect);
         }
 

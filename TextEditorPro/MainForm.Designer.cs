@@ -482,7 +482,7 @@
             NewFile_toolStrip.ImageTransparentColor = Color.Magenta;
             NewFile_toolStrip.Name = "NewFile_toolStrip";
             NewFile_toolStrip.Size = new Size(36, 36);
-            NewFile_toolStrip.Text = "toolStripButton1";
+            NewFile_toolStrip.Text = "Создать файл";
             NewFile_toolStrip.Click += NewFile_toolStrip_Click;
             // 
             // OpenFile_toolStrip
@@ -493,7 +493,7 @@
             OpenFile_toolStrip.ImageTransparentColor = Color.Magenta;
             OpenFile_toolStrip.Name = "OpenFile_toolStrip";
             OpenFile_toolStrip.Size = new Size(36, 36);
-            OpenFile_toolStrip.Text = "toolStripButton2";
+            OpenFile_toolStrip.Text = "Открыть файл";
             OpenFile_toolStrip.Click += OpenFile_toolStrip_Click;
             // 
             // SaveFile_toolStrip
@@ -504,7 +504,7 @@
             SaveFile_toolStrip.ImageTransparentColor = Color.Magenta;
             SaveFile_toolStrip.Name = "SaveFile_toolStrip";
             SaveFile_toolStrip.Size = new Size(36, 36);
-            SaveFile_toolStrip.Text = "toolStripButton3";
+            SaveFile_toolStrip.Text = "Сохранить файл";
             SaveFile_toolStrip.Click += SaveFile_toolStrip_Click;
             // 
             // toolStripSeparator4
@@ -520,7 +520,7 @@
             RegularStrip.ImageTransparentColor = Color.Magenta;
             RegularStrip.Name = "RegularStrip";
             RegularStrip.Size = new Size(36, 36);
-            RegularStrip.Text = "toolStripButton4";
+            RegularStrip.Text = "Регулярное начертание";
             RegularStrip.Click += RegularStrip_Click;
             // 
             // BoldStrip
@@ -531,7 +531,7 @@
             BoldStrip.ImageTransparentColor = Color.Magenta;
             BoldStrip.Name = "BoldStrip";
             BoldStrip.Size = new Size(36, 36);
-            BoldStrip.Text = "toolStripButton5";
+            BoldStrip.Text = "Жирное начертание";
             BoldStrip.Click += BoldStrip_Click;
             // 
             // UnderlineStrip
@@ -542,7 +542,7 @@
             UnderlineStrip.ImageTransparentColor = Color.Magenta;
             UnderlineStrip.Name = "UnderlineStrip";
             UnderlineStrip.Size = new Size(36, 36);
-            UnderlineStrip.Text = "toolStripButton6";
+            UnderlineStrip.Text = "Подчеркнутое";
             UnderlineStrip.Click += UnderlineStrip_Click;
             // 
             // CoursiveStrip
@@ -553,7 +553,7 @@
             CoursiveStrip.ImageTransparentColor = Color.Magenta;
             CoursiveStrip.Name = "CoursiveStrip";
             CoursiveStrip.Size = new Size(36, 36);
-            CoursiveStrip.Text = "toolStripButton7";
+            CoursiveStrip.Text = "Курсив";
             CoursiveStrip.Click += CoursiveStrip_Click;
             // 
             // toolStripSeparator8
@@ -569,7 +569,7 @@
             Copy_toolStrip.ImageTransparentColor = Color.Magenta;
             Copy_toolStrip.Name = "Copy_toolStrip";
             Copy_toolStrip.Size = new Size(36, 36);
-            Copy_toolStrip.Text = "toolStripButton8";
+            Copy_toolStrip.Text = "Копировать";
             Copy_toolStrip.Click += Copy_toolStrip_Click;
             // 
             // Cut_toolStrip
@@ -580,7 +580,7 @@
             Cut_toolStrip.ImageTransparentColor = Color.Magenta;
             Cut_toolStrip.Name = "Cut_toolStrip";
             Cut_toolStrip.Size = new Size(36, 36);
-            Cut_toolStrip.Text = "toolStripButton9";
+            Cut_toolStrip.Text = "Вырезать";
             Cut_toolStrip.Click += Cut_toolStrip_Click;
             // 
             // Paste_toolStrip
@@ -591,7 +591,7 @@
             Paste_toolStrip.ImageTransparentColor = Color.Magenta;
             Paste_toolStrip.Name = "Paste_toolStrip";
             Paste_toolStrip.Size = new Size(36, 36);
-            Paste_toolStrip.Text = "toolStripButton10";
+            Paste_toolStrip.Text = "Вставить";
             Paste_toolStrip.Click += Paste_toolStrip_Click;
             // 
             // MainForm
