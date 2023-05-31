@@ -25,7 +25,7 @@ namespace TextEditorPro
         {
             TabPagePlus tabpage = new TabPagePlus(this);
             RichTextBox rtb = tabpage._myRichTextBox.richTextBoxPlus;
-            FileWork.FileOpen(tabControlPlus, tabpage, OpenFileDialog, rtb, FilenameStatusLabel);
+            FileWork.FileOpen(tabControlPlus, tabpage, rtb, FilenameStatusLabel);
         }
 
         private void SaveFile_MenuItem_Click(object sender, EventArgs e)
@@ -37,14 +37,14 @@ namespace TextEditorPro
             }
             else
             {
-                FileWork.FileSaveAs(tabControlPlus, tabpage, SaveFileDialog, FilenameStatusLabel);
+                FileWork.FileSaveAs(tabControlPlus, tabpage, FilenameStatusLabel);
             }
         }
 
         private void SaveAsFile_MenuItem_Click(object sender, EventArgs e)
         {
             TabPage tabpage = tabControlPlus.SelectedTab;
-            FileWork.FileSaveAs(tabControlPlus, tabpage, SaveFileDialog, FilenameStatusLabel);
+            FileWork.FileSaveAs(tabControlPlus, tabpage, FilenameStatusLabel);
         }
 
         private void SaveAll_MenuItem_Click(object sender, EventArgs e)

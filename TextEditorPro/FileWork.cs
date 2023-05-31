@@ -1,12 +1,11 @@
-﻿using System.Windows.Forms;
-using TextEditorPro.Controls;
+﻿using TextEditorPro.Controls;
 
 namespace TextEditorPro
 {
     public class FileWork
     {
-        public static List<string> OpenedFilesList = new List<string> { };
-        public static int count = 1;
+        private static List<string> OpenedFilesList = new List<string> { };
+        private static int count = 1;
 
         public static void FileNew(TabControl tabControl, TabPage tabPage, ToolStripStatusLabel filenameStatusLabel)
         {
@@ -21,8 +20,9 @@ namespace TextEditorPro
             count++;
         }
 
-        public static void FileOpen(TabControl tabControl, TabPage tabPage, OpenFileDialog openFileDialog, RichTextBox rtb, ToolStripStatusLabel filenameStatusLabel)
+        public static void FileOpen(TabControl tabControl, TabPage tabPage, RichTextBox rtb, ToolStripStatusLabel filenameStatusLabel)
         {
+            OpenFileDialog openFileDialog  = new OpenFileDialog();
             openFileDialog.Filter = "All files (*.*)|*.*|Text Files(*.txt)|*.txt|RichText Files(*.rtf)|*.rtf";
             openFileDialog.FileName = "";
 
@@ -88,12 +88,13 @@ namespace TextEditorPro
             }
         }
 
-        public static void FileSaveAs(TabControl tabControl, TabPage tabPage, SaveFileDialog saveFileDialog, ToolStripStatusLabel filenameStatusLabel)
+        public static void FileSaveAs(TabControl tabControl, TabPage tabPage, ToolStripStatusLabel filenameStatusLabel)
         {
             if (tabControl.TabCount > 0)
             {
                 if (tabPage != null)
                 {
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
                     saveFileDialog.Filter = "All files (*.*)|*.*|Text Files(*.txt)|*.txt|RichText Files(*.rtf)|*.rtf";
                     saveFileDialog.FileName = "";
 
@@ -222,12 +223,7 @@ namespace TextEditorPro
                     }
                 }
 
-                if (tabControl.SelectedIndex >= 0)
-                {
-                    var _myRichTextBox = (MyRichTextBox)tabControl.TabPages[tabControl.SelectedIndex].Controls[0];
-                    _myRichTextBox.richTextBoxPlus.Select();
-                }
-
+                tabControl.SelectedIndex = tabControl.TabPages.Count - 1;
             }
             else
             {
